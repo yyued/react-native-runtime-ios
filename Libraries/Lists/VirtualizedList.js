@@ -20,10 +20,8 @@ const ScrollView = require('ScrollView');
 const View = require('View');
 const ViewabilityHelper = require('ViewabilityHelper');
 
-const flattenStyle = require('flattenStyle');
 const infoLog = require('infoLog');
 const invariant = require('fbjs/lib/invariant');
-const warning = require('fbjs/lib/warning');
 
 const {computeWindowedRenderLimits} = require('VirtualizeUtils');
 
@@ -411,15 +409,6 @@ class VirtualizedList extends React.PureComponent<OptionalProps, Props, State> {
   };
 
   render() {
-    if (__DEV__) {
-      const flatStyles = flattenStyle(this.props.contentContainerStyle);
-      warning(
-        flatStyles == null || flatStyles.flexWrap !== 'wrap',
-        '`flexWrap: `wrap`` is not supported with the `VirtualizedList` components.' +
-          'Consider using `numColumns` with `FlatList` instead.',
-      );
-    }
-
     const {ListEmptyComponent, ListFooterComponent, ListHeaderComponent} = this.props;
     const {data, disableVirtualization, horizontal} = this.props;
     const cells = [];
@@ -734,7 +723,7 @@ class VirtualizedList extends React.PureComponent<OptionalProps, Props, State> {
     const dOffset = offset - this._scrollMetrics.offset;
     const velocity = dOffset / dt;
     this._scrollMetrics = {contentLength, dt, dOffset, offset, timestamp, velocity, visibleLength};
-    this._updateViewableItems(this.props.data);
+    this._updateViewableItems(this.props);
     if (!this.props) {
       return;
     }

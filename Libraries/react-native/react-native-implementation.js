@@ -24,7 +24,6 @@ const ReactNative = {
   get DrawerLayoutAndroid() { return require('DrawerLayoutAndroid'); },
   get FlatList() { return require('FlatList'); },
   get Image() { return require('Image'); },
-  get ImageBackground() { return require('ImageBackground'); },
   get ImageEditor() { return require('ImageEditor'); },
   get ImageStore() { return require('ImageStore'); },
   get KeyboardAvoidingView() { return require('KeyboardAvoidingView'); },

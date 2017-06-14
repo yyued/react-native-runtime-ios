@@ -123,6 +123,9 @@ void removeGlobal(JSGlobalContextRef ctx, const char* name) {
 }
 
 JSValueRef evaluateScript(JSContextRef context, JSStringRef script, JSStringRef source) {
+  #ifdef WITH_FBSYSTRACE
+  fbsystrace::FbSystraceSection s(TRACE_TAG_REACT_CXX_BRIDGE, "evaluateScript");
+  #endif
   JSValueRef exn, result;
   result = JSC_JSEvaluateScript(context, script, NULL, source, 0, &exn);
   if (result == nullptr) {
